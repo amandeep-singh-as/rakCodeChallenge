@@ -1,5 +1,6 @@
-import { Container, Divider, Grid, Paper, Stack } from '@mui/material';
+import { Container, Divider, Grid, Pagination, Paper, Stack } from '@mui/material';
 import React from 'react';
+import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
 
 const Home = () => {
@@ -19,7 +20,32 @@ const Home = () => {
                         </Grid>
                     </Grid>
                     <Grid item>
-                        test 2
+                        <Grid container justifyContent='center' alignItems='center' spacing={2}>
+                            <Grid item>
+                                <ItemsLoading></ItemsLoading>
+                            </Grid>
+                            <Grid item>
+                                <ItemsLoading></ItemsLoading>
+                            </Grid>
+                            <Grid item>
+                                <ItemsLoading></ItemsLoading>
+                            </Grid>
+                            <Grid item>
+                                <ItemsLoading></ItemsLoading>
+                            </Grid>
+                            <Grid item>
+                                <ItemsLoading></ItemsLoading>
+                            </Grid>
+                            <Grid item>
+                                <ItemsLoading></ItemsLoading>
+                            </Grid>
+                        </Grid>  
+                    </Grid>
+
+                    <Grid item style={{
+                        marginBottom: "2%"
+                    }}>
+                        <Pagination count={10} color="secondary"></Pagination>
                     </Grid>
                 </Stack>    
             </Paper>

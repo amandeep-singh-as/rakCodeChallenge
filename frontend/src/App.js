@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
+import Beer from './components/Beer';
 
 const App = () => {
   return(
@@ -14,6 +15,7 @@ const App = () => {
         <Route path="/" exact element={<Navigate to="/home"></Navigate>}>
         </Route>
         <Route path="/home" element={<Home/>}></Route>
+        <Route path="/beer" element={<Beer/>}></Route>
       </Routes>
     </div>
   );
