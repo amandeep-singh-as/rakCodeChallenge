@@ -4,6 +4,7 @@ import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
 
 const Home = () => {
+
     return(
         <Container style={{
             marginTop: '2%'
