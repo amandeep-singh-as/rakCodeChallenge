@@ -15,7 +15,7 @@ const Home = () => {
                     <Divider flexItem></Divider>
                 }>
                     <Grid container justifyContent="center" alignItems="center">
-                        <Grid item mt={2} xs={12} md={6}>
+                        <Grid item mt={2} xs={8} md={6}>
                             <SearchBar/>
                         </Grid>
                     </Grid>
