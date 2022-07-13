@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, Skeleton } from '@mui/material';
+import { Card, CardActions, CardContent, CardHeader, Skeleton } from '@mui/material';
 import { Link } from 'react-router-dom';
 import React from 'react';
 
@@ -10,9 +10,7 @@ const ItemsLoading = () => {
             width: 280,
             m: 2
         }}>
-            <CardHeader avatar={
-                <Skeleton animation='wave' variant='circle' width={40} height={40}></Skeleton>
-            } title={
+            <CardHeader title={
                 <Skeleton animation='wave' height={10} width='80%' style={{
                     marginBottom: 6
                 }}></Skeleton>
@@ -29,6 +27,9 @@ const ItemsLoading = () => {
                     <Skeleton animation='wave' height={10} width="80%"></Skeleton>
                 </>
             </CardContent>
+            <CardActions disableSpacing>
+                <Skeleton animation="wave" variant='circle' width={40} height={40}></Skeleton>
+            </CardActions>
         </Card>
         </Link>
        

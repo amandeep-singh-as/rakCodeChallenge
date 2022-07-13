@@ -14,7 +14,7 @@ const Items = (props) => {
     return(
         <Card sx={{ maxWidth: 200, m:2 }}>
             <CardHeader title={props.beer.name} subheader={props.beer.tagline}></CardHeader>
-            <CardMedia component="img" height="194" image={props.beer.image_url} alt={props.beer.name}></CardMedia>
+            <CardMedia component="img" height="190" image={props.beer.image_url} alt={props.beer.name}></CardMedia>
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
                     {props.beer.description}
