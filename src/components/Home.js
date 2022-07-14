@@ -1,9 +1,21 @@
 import { Container, Divider, Grid, Pagination, Paper, Stack } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
+import axios from 'axios';
+import Items from './Items';
 
 const Home = () => {
+
+    const [beers, setBeers] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        axios.get('https://api.punkapi.com/v2/beers').then((response) => {
+            setBeers(response.data);
+            setLoading(false);
+        })
+    }, [])
 
     return(
         <Container style={{
@@ -22,31 +34,24 @@ const Home = () => {
                     </Grid>
                     <Grid item>
                         <Grid container justifyContent='center' alignItems='center' spacing={2}>
-                            <Grid item>
-                                <ItemsLoading></ItemsLoading>
-                            </Grid>
-                            <Grid item>
-                                <ItemsLoading></ItemsLoading>
-                            </Grid>
-                            <Grid item>
-                                <ItemsLoading></ItemsLoading>
-                            </Grid>
-                            <Grid item>
-                                <ItemsLoading></ItemsLoading>
-                            </Grid>
-                            <Grid item>
-                                <ItemsLoading></ItemsLoading>
-                            </Grid>
-                            <Grid item>
-                                <ItemsLoading></ItemsLoading>
-                            </Grid>
+                            {
+                                loading ? [1,2,3].map((item) => 
+                                    <Grid item>
+                                        <ItemsLoading/>
+                                    </Grid>
+                                ) : beers.map((beer) => 
+                                    <Grid item>
+                                        <Items beer={beer}></Items>
+                                    </Grid>
+                                )
+                            }
                         </Grid>  
                     </Grid>
 
                     <Grid item style={{
                         marginBottom: "2%"
                     }}>
-                        <Pagination count={10} color="secondary"></Pagination>
+                        {/* <Pagination count={10} color="secondary"></Pagination> */}
                     </Grid>
                 </Stack>    
             </Paper>
