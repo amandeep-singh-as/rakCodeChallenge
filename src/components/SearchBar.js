@@ -27,7 +27,7 @@ const SearchBar = () => {
 
         <FormControl>
             <FormLabel aria-label="search-type">Search By:</FormLabel>
-            <RadioGroup  aria-aria-labelledby="search-type" name="search-by" row value={searchType} onChange={changeSearchType}>
+            <RadioGroup  aria-labelledby="search-type" name="search-by" row value={searchType} onChange={changeSearchType}>
                 <FormControlLabel  value="fermentation" control={<Radio></Radio>} label="Fermentation Type"></FormControlLabel>
                 <FormControlLabel value="bitterness" control={<Radio></Radio>} label="Bitteness"></FormControlLabel>
                 <FormControlLabel value="food-pairing" control={<Radio></Radio>} label="Food Pairing"></FormControlLabel>
