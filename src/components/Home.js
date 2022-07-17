@@ -1,14 +1,25 @@
-import { Container, Divider, Grid, Pagination, Paper, Stack } from '@mui/material';
+import { Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, IconButton, Menu, MenuItem, Pagination, Paper, RadioGroup, Stack, Typography, Radio } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
 import axios from 'axios';
 import Items from './Items';
+import FilterListIcon from '@mui/icons-material/FilterList';
 
 const Home = () => {
 
     const [beers, setBeers] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    }
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    }
 
     useEffect(() => {
         axios.get('https://api.punkapi.com/v2/beers').then((response) => {
@@ -28,12 +39,14 @@ const Home = () => {
                     <Divider flexItem></Divider>
                 }>
                     <Grid container justifyContent="center" alignItems="center">
-                        <Grid item mt={2} xs={8} md={6}>
+                        <Grid item mt={2} xs={6} md={6}>
                             <SearchBar/>
                         </Grid>
                     </Grid>
                     <Grid item>
                         <Grid container justifyContent='center' alignItems='center' spacing={2}>
+                            <Grid item xs={12} mt={1} md={12}>
+                            </Grid>
                             {
                                 loading ? [1,2,3].map((item) => 
                                     <Grid item>
