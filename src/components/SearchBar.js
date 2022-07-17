@@ -1,6 +1,6 @@
-import { Autocomplete, FormControl, FormControlLabel, FormLabel, IconButton, InputAdornment, RadioGroup, TextField, Radio} from "@mui/material";
+import { FormControl, FormControlLabel, FormLabel,  RadioGroup, Radio} from "@mui/material";
 import React, { useState } from "react";
-import SearchIcon from '@mui/icons-material/Search';
+// import SearchIcon from '@mui/icons-material/Search';
 
 const SearchBar = () => {
 

@@ -1,10 +1,10 @@
-import { Container, Divider, FormControl, FormControlLabel, FormLabel, Grid, IconButton, Menu, MenuItem, Pagination, Paper, RadioGroup, Stack, Typography, Radio } from '@mui/material';
+import { Container, Divider, Grid, Paper, Stack } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
 import axios from 'axios';
 import Items from './Items';
-import FilterListIcon from '@mui/icons-material/FilterList';
+// import FilterListIcon from '@mui/icons-material/FilterList';
 
 const Home = () => {
 
@@ -13,13 +13,13 @@ const Home = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
 
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    }
+    // const handleClick = (event) => {
+    //     setAnchorEl(event.currentTarget);
+    // }
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    }
+    // const handleClose = () => {
+    //     setAnchorEl(null);
+    // }
 
     useEffect(() => {
         axios.get('https://api.punkapi.com/v2/beers').then((response) => {
