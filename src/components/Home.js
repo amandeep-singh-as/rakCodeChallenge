@@ -10,8 +10,8 @@ const Home = () => {
 
     const [beers, setBeers] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [anchorEl, setAnchorEl] = useState(null);
-    const open = Boolean(anchorEl);
+    // const [anchorEl, setAnchorEl] = useState(null);
+    // const open = Boolean(anchorEl);
 
     // const handleClick = (event) => {
     //     setAnchorEl(event.currentTarget);
