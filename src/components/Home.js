@@ -1,32 +1,14 @@
 import { Container, Divider, Grid, Paper, Stack } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
-import axios from 'axios';
 import Items from './Items';
+import { AppContext } from '../context';
 // import FilterListIcon from '@mui/icons-material/FilterList';
 
 const Home = () => {
 
-    const [beers, setBeers] = useState([]);
-    const [loading, setLoading] = useState(true);
-    // const [anchorEl, setAnchorEl] = useState(null);
-    // const open = Boolean(anchorEl);
-
-    // const handleClick = (event) => {
-    //     setAnchorEl(event.currentTarget);
-    // }
-
-    // const handleClose = () => {
-    //     setAnchorEl(null);
-    // }
-
-    useEffect(() => {
-        axios.get('https://api.punkapi.com/v2/beers').then((response) => {
-            setBeers(response.data);
-            setLoading(false);
-        })
-    }, [])
+    const { allBeers, loading } = useContext(AppContext)
 
     return(
         <Container style={{
@@ -52,7 +34,7 @@ const Home = () => {
                                     <Grid item>
                                         <ItemsLoading/>
                                     </Grid>
-                                ) : beers.map((beer) => 
+                                ) : allBeers.map((beer) => 
                                     <Grid item>
                                         <Items beer={beer}></Items>
                                     </Grid>

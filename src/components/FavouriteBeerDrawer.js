@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import { styled } from '@mui/material/styles';
 import { AppContext } from "../context";
-import ItemsLoading from "./ItemsLoading";
+import Items from "./Items";
 
 
 const DrawerHeader = styled('div')(({ theme }) => ({
@@ -40,7 +40,7 @@ const FavouriteBeerDrawer = (props) => {
                 {
                     favBeers.map(favBeer => {
                         return(
-                            <ItemsLoading></ItemsLoading>
+                            <Items beer={favBeer}></Items>
                         );
                     })
                 }

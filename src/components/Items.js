@@ -5,10 +5,10 @@ import { AppContext } from "../context";
 
 const Items = (props) => {
 
-    const { dispatchBeerEvent } = useContext(AppContext);
+    const { dispatchFavBeerEvent } = useContext(AppContext);
 
     const handleClick = () => {
-        dispatchBeerEvent('ADD_BEER', props.beer)
+        dispatchFavBeerEvent('ADD_BEER', props.beer)
     }
 
     return(
