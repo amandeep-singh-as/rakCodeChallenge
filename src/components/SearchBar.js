@@ -42,7 +42,7 @@ const SearchBar = () => {
             'searchType': searchType,
             'payload': payload
         })
-    }, [searchType, fermentationType, bitternessVal, foodPairningValue]);
+    }, [searchType, fermentationType, bitternessVal, foodPairningValue, dispatchSearchParamsEvent]);
 
 
     return(
