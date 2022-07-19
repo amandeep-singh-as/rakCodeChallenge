@@ -10,15 +10,109 @@ const App = () => {
 
   const [favBeers, setFavBeers] = useState([]);
   const [allBeers, setAllBeers] = useState([]);
-  const [searchParam, setSearchParams] = useState();
+  const [searchParam, setSearchParams] = useState({
+    searchType: 'all',
+    payload: ''
+  });
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    axios.get('https://api.punkapi.com/v2/beers').then((response) => {
+    if(searchParam.searchType !== 'fermentation') {
+      getAll();
+    } else {
+      if(searchParam.payload === 'topFermentation') {
+        searchTopFermentatedBeer()
+      } else {
+        searchBottomFermentatedBeer()
+      }
+    }
+  }, [page]);
+
+
+  useEffect(() => {
+    if(typeof searchParam != 'undefined' && searchParam.searchType === 'food-pairing') {
+      console.log("In food");
+      searchByFood(searchParam.payload);
+    } else if(typeof searchParam != 'undefined' && searchParam.searchType === 'bitterness'){
+      console.log("In bitterness")
+      searchByBitterness(parseInt(searchParam.payload))
+    } else if (typeof searchParam != 'undefined' && searchParam.payload === 'topFermentation'){
+      setPage(1)
+      searchTopFermentatedBeer()
+    } else if (typeof searchParam != 'undefined' && searchParam.payload === 'bottomFermentation') {
+      setPage(1)
+      searchBottomFermentatedBeer()
+    } else {
+      setPage(1);
+      getAll();
+    }
+  }, [searchParam]);
+
+  const getAll = () => {
+    axios.get('https://api.punkapi.com/v2/beers?page=' + page + '&per_page=15').then((response) => {
         setAllBeers(response.data);
         setLoading(false);
+      }).catch((error) => {
+        console.log("Error at all beers ", error);
+      })
+  }
+
+  const searchByBitterness = (ibu) => {
+    setLoading(true);
+    axios.get('https://api.punkapi.com/v2/beers/?ibu_gt=' + (ibu - 1).toString()).then((response) => {
+      setAllBeers(response.data.filter((beer) => beer.ibu === ibu));
+      setLoading(false);
+    }).catch((error) => {
+      console.log("Error");
     })
-  }, [])
+  }
+
+  const searchTopFermentatedBeer = () => {
+    setLoading(true);
+    axios.get('https://api.punkapi.com/v2/beers?page=' + page + '&per_page=15').then((response) => {
+      setAllBeers(response.data.filter((beer) => beer.method.fermentation.temp.value >= 10 
+      && beer.method.fermentation.temp.value <= 25));
+      if(setAllBeers.length === 0) {
+        setPage((page + 1))
+      }
+      setLoading(false);
+    }).catch((error) => {
+      console.log("Error", error);
+    })
+  }
+
+  const searchBottomFermentatedBeer = () => {
+    setLoading(true);
+    axios.get('https://api.punkapi.com/v2/beers?page=' + page + '&per_page=15').then((response) => {
+      setAllBeers(response.data.filter((beer) => beer.method.fermentation.temp.value >= 7 
+      && beer.method.fermentation.temp.value <= 15));
+      setLoading(false)
+    }).catch((error) => {
+      console.log("Error", error);
+    })
+  }
+
+  const searchByFood = (terms) => {
+    console.log("In the function")
+    setLoading(true);
+    axios.get('https://api.punkapi.com/v2/beers/?food=' + terms.replaceAll(" ", "_")).then((response) => {
+      setAllBeers(response.data);
+      setLoading(false);
+    }).catch((error) => {
+      console.log("Error");
+    })
+  }
+
+  const dispatchPageEvent = (actionType, payload) => {
+    switch(actionType) {
+      case 'SET_PAGE':
+        setPage(payload);
+        return;
+      default:
+        return;
+    }
+  }
 
   const dispatchLoading = (actionType, payload) => {
     switch(actionType) {
@@ -64,7 +158,7 @@ const App = () => {
         favBeers, dispatchFavBeerEvent,
         loading, dispatchLoading,
         searchParam, dispatchSearchParamsEvent,
-        allBeers
+        allBeers, dispatchPageEvent, page
 
       }}>
         <Header></Header>

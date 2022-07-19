@@ -1,15 +1,18 @@
-import { Container, Divider, Grid, Paper, Stack } from '@mui/material';
+import { Container, Divider, Grid, Paper, Stack, Pagination, Typography } from '@mui/material';
 import React, { useContext } from 'react';
 import ItemsLoading from './ItemsLoading';
 import SearchBar from './SearchBar';
 import Items from './Items';
 import { AppContext } from '../context';
-// import FilterListIcon from '@mui/icons-material/FilterList';
+
 
 const Home = () => {
 
-    const { allBeers, loading } = useContext(AppContext)
+    const { allBeers, loading,  dispatchPageEvent, searchParam} = useContext(AppContext);
 
+    const pageChange = (event) => {
+        dispatchPageEvent('SET_PAGE', event.target.textContent);
+    }
     return(
         <Container style={{
             marginTop: '2%'
@@ -34,11 +37,13 @@ const Home = () => {
                                     <Grid item>
                                         <ItemsLoading/>
                                     </Grid>
-                                ) : allBeers.map((beer) => 
-                                    <Grid item>
-                                        <Items beer={beer}></Items>
-                                    </Grid>
-                                )
+                                ) : allBeers.length > 0 ? 
+                                        allBeers.map((beer) => 
+                                        <Grid item>
+                                            <Items beer={beer}></Items>
+                                        </Grid>
+                                    ) : 
+                                    <Typography variant='body'>No results</Typography>
                             }
                         </Grid>  
                     </Grid>
@@ -46,7 +51,13 @@ const Home = () => {
                     <Grid item style={{
                         marginBottom: "2%"
                     }}>
-                        {/* <Pagination count={10} color="secondary"></Pagination> */}
+                        {
+                            typeof searchParam != 'undefined' && (searchParam.searchType === 'all' 
+                            || searchParam.searchType === 'fermentation')?
+                            <Pagination count={10} color="secondary" onChange={pageChange}></Pagination> :
+                            <></>
+                        }
+                        
                     </Grid>
                 </Stack>    
             </Paper>

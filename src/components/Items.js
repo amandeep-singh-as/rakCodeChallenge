@@ -23,7 +23,7 @@ const Items = (props) => {
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favourites" onClick={handleClick}>
+                <IconButton aria-label="add to favourites" onClick={handleClick} >
                     <FavoriteIcon></FavoriteIcon>
                 </IconButton>
             </CardActions>

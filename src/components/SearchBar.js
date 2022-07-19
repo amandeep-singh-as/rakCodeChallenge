@@ -7,7 +7,7 @@ const SearchBar = () => {
 
     const {  dispatchSearchParamsEvent } = useContext(AppContext);
 
-    const [searchType, setSearchType] = useState();
+    const [searchType, setSearchType] = useState('all');
     const [fermentationType, setFermentationType] = useState("topFermentation");
     const [bitternessVal, setBitternessVal] = useState("");
     const [foodPairningValue, setFoodPairingValue] = useState("");
@@ -29,20 +29,21 @@ const SearchBar = () => {
     }
 
     useEffect(() => {
-        var payload = "all";
+        var payload = "";
         if(searchType === 'fermentation') {
             payload = fermentationType
         } else if (searchType === 'bitterness') {
             payload = bitternessVal
         } else if (searchType === 'food-pairing') {
             payload = foodPairningValue
+        } else {
+            payload = ''
         }
-        console.log("Test ::: ", payload);
         dispatchSearchParamsEvent('SET_SEARCH_PARAMS', {
             'searchType': searchType,
             'payload': payload
         })
-    }, [searchType, fermentationType, bitternessVal, foodPairningValue, dispatchSearchParamsEvent]);
+    }, [searchType, fermentationType, bitternessVal, foodPairningValue]);
 
 
     return(
