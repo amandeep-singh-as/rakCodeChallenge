@@ -8,10 +8,10 @@ import { AppContext } from '../context';
 
 const Home = () => {
 
-    const { allBeers, loading,  dispatchPageEvent, searchParam} = useContext(AppContext);
+    const { allBeers, loading,  dispatchPageEvent, searchParam } = useContext(AppContext);
 
-    const pageChange = (event) => {
-        dispatchPageEvent('SET_PAGE', event.target.textContent);
+    const pageChange = (event, value) => {
+        dispatchPageEvent('SET_PAGE', value);
     }
     return(
         <Container style={{
@@ -33,7 +33,7 @@ const Home = () => {
                             <Grid item xs={12} mt={1} md={12}>
                             </Grid>
                             {
-                                loading ? [1,2,3].map((item) => 
+                                searchParam.searchType == 'all' && loading ? [1,2,3].map((item) => 
                                     <Grid item>
                                         <ItemsLoading/>
                                     </Grid>

@@ -127,6 +127,7 @@ const App = () => {
   const dispatchSearchParamsEvent = (actionType, payload) => {
     switch(actionType) {
       case 'SET_SEARCH_PARAMS':
+        setAllBeers([]);
         setSearchParams(payload);
         return;
       default:
@@ -141,7 +142,7 @@ const App = () => {
         return;
       case 'REMOVE_BEER':
         setFavBeers(favBeers.filter(
-          favBeers => favBeers.id !== payload.beerId
+          beer => beer.id !== payload
         ));
         return;
       default:
