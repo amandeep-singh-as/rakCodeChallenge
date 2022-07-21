@@ -9,6 +9,7 @@ import SentimentDissatisfiedIcon from '@mui/icons-material/SentimentDissatisfied
 import SentimentSatisfiedIcon from '@mui/icons-material/SentimentSatisfied';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAltOutlined';
 import SentimentVerySatisfiedIcon from '@mui/icons-material/SentimentVerySatisfied';
+import { Link } from 'react-router-dom';
 
 
 const StyledRating = styled(Rating)(({ theme }) => ({
@@ -56,7 +57,7 @@ const Items = (props) => {
     const [rating, setRaiting] = useState();
     const [comments, setComments] = useState();
     const [alreadyFav, setAlreadyFav] = useState(
-        favBeers.includes(props.beer)
+        favBeers.filter( (b) => b.id == props.beer.id )[0]
     )
 
     const onCommentChange = (event) => {
@@ -115,12 +116,14 @@ const Items = (props) => {
 
     return(
        <>
-        <Card sx={{ maxWidth: 300, m:2, height: 400, width: 300 }}>
-            <Typography sx={{ fontSize: 20, paddingLeft: 2, paddingRight:2, marginTop: 3 }}
-                gutterBottom
-                color="text.primary">
-                {props.beer.name}
-            </Typography>
+       <Card sx={{ maxWidth: 300, m:2, height: 400, width: 300 }}>
+            <Link to="/beer" state={props.beer}>
+                <Typography sx={{ fontSize: 20, paddingLeft: 2, paddingRight:2, marginTop: 3 }}
+                    gutterBottom
+                    color="text.primary">
+                    {props.beer.name}
+                </Typography>
+            </Link>
             <Typography sx={{ fontSize: 14, paddingLeft: 2, paddingRight: 2 }}
                 gutterBottom
                 color="text.secondary">
@@ -138,7 +141,6 @@ const Items = (props) => {
                 </IconButton>
             </CardActions>
         </Card>
-
         <Dialog open={open} onClose={handleClose} fullWidth maxWidth='sm'>
             <DialogTitle>
                 {
